@@ -1,0 +1,22 @@
+import cv2
+import numpy as np
+
+# https://www.flickr.com/photos/keithmwilliams/5828687579
+sample_image = cv2.imread(
+    "/Users/gefeishen/Developer/Research/Playground/CV-Playground/FeatureDetection&Matching/bear.jpg")
+converted_img = cv2.cvtColor(sample_image, cv2.COLOR_BGR2RGB)
+
+spatial_radius = 20
+color_radius = 40
+
+# Apply mean shift segmentation
+mean_shifted = cv2.pyrMeanShiftFiltering(
+    converted_img, spatial_radius, color_radius)
+
+# Convert the result back to the BGR color space for displaying
+result = cv2.cvtColor(mean_shifted, cv2.COLOR_RGB2BGR)
+
+# Display the result
+cv2.imshow('Mean Shift Segmentation', result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
